@@ -9,9 +9,15 @@ export function createDeviceStore() {
       throw new TypeError("MQTT payload must be a JSON object");
     }
 
-    const temperatureX10 = Number(payload.temperature_x10);
+    const hasX10Temperature = payload.temperature_x10 !== undefined;
+    const temperature = Number(payload.temperature);
+    const temperatureX10 = hasX10Temperature
+      ? Number(payload.temperature_x10)
+      : Number.isFinite(temperature) ? Math.round(temperature * 10) : NaN;
     const threshold = Number(payload.threshold);
-    const temperatureValid = Number(payload.temperature_valid) === 1;
+    const temperatureValid = hasX10Temperature
+      ? Number(payload.temperature_valid) === 1
+      : Number.isFinite(temperature);
     const person = Number(payload.person) === 1;
     const alarm = Number(payload.alarm) === 1;
 
