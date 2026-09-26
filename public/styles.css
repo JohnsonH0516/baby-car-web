@@ -1,0 +1,120 @@
+:root {
+  color-scheme: light;
+  font-family: Inter, "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  background: #f6f7f8;
+  color: #17201d;
+  letter-spacing: 0;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; min-width: 320px; background: #f6f7f8; }
+button, input { font: inherit; }
+button { cursor: pointer; }
+
+.topbar {
+  min-height: 92px;
+  padding: max(20px, env(safe-area-inset-top)) 22px 18px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  background: #ffffff;
+  border-bottom: 1px solid #dde3e0;
+}
+
+h1, h2, p { margin: 0; }
+h1 { margin-top: 3px; font-size: 24px; line-height: 1.2; font-weight: 720; }
+h2 { margin-top: 3px; font-size: 19px; line-height: 1.3; }
+.eyebrow { color: #6b7772; font-size: 11px; font-weight: 700; text-transform: uppercase; }
+
+.connection {
+  min-width: 88px;
+  height: 34px;
+  padding: 0 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  border: 1px solid #d8dfdc;
+  border-radius: 8px;
+  background: #fafbfa;
+  color: #59635f;
+  font-size: 13px;
+  white-space: nowrap;
+}
+.status-dot { width: 8px; height: 8px; border-radius: 50%; background: #98a19d; }
+.connection.online .status-dot { background: #16875f; }
+.connection.online { color: #126b4d; border-color: #badacc; background: #f0f8f4; }
+.connection.error .status-dot { background: #c1483f; }
+
+main { width: min(100%, 820px); margin: 0 auto; padding: 18px 18px calc(36px + env(safe-area-inset-bottom)); }
+
+.alarm-banner {
+  min-height: 76px;
+  margin-bottom: 14px;
+  padding: 14px 14px 14px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  color: #70251f;
+  background: #fff0ed;
+  border: 1px solid #efb4ad;
+  border-left: 5px solid #c1483f;
+  border-radius: 8px;
+}
+.alarm-banner p { margin-top: 3px; font-size: 13px; line-height: 1.45; }
+.alarm-banner button { border: 0; background: transparent; color: #70251f; font-weight: 700; }
+.hidden { display: none; }
+
+.metrics { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.metric {
+  min-height: 132px;
+  padding: 17px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: #ffffff;
+  border: 1px solid #dce2df;
+  border-radius: 8px;
+}
+.metric.primary { background: #153e34; color: #ffffff; border-color: #153e34; }
+.metric > span { color: #68736f; font-size: 13px; }
+.metric.primary > span { color: #c7d8d2; }
+.metric strong { display: block; font-size: 35px; line-height: 1; font-weight: 710; }
+.metric strong small { margin-left: 4px; font-size: 16px; font-weight: 600; }
+.metric p { color: #7c8582; font-size: 12px; }
+.metric.primary p { color: #c7d8d2; }
+.metric.compact { min-height: 92px; }
+.metric.compact strong { font-size: 20px; }
+.metric .danger { color: #c1483f; }
+
+.trend-section, .control-section { margin-top: 20px; padding: 20px 0; border-top: 1px solid #d9dfdc; }
+.section-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; }
+.section-heading > span, .section-heading output { color: #63706b; font-size: 13px; }
+.chart-wrap { height: 184px; margin-top: 18px; background: #ffffff; border: 1px solid #dce2df; border-radius: 8px; overflow: hidden; }
+canvas { display: block; width: 100%; height: 100%; }
+
+.control-section output { color: #153e34; font-size: 24px; font-weight: 720; }
+input[type="range"] { width: 100%; margin: 28px 0 5px; accent-color: #16875f; }
+.range-labels { display: flex; justify-content: space-between; color: #7a8580; font-size: 12px; }
+.primary-button {
+  width: 100%;
+  min-height: 48px;
+  margin-top: 22px;
+  border: 0;
+  border-radius: 8px;
+  color: #ffffff;
+  background: #16875f;
+  font-weight: 720;
+}
+.primary-button:disabled { cursor: not-allowed; background: #9eaaa5; }
+.feedback { min-height: 21px; margin-top: 8px; text-align: center; color: #59635f; font-size: 13px; }
+.feedback.error { color: #a4362f; }
+
+@media (min-width: 700px) {
+  .topbar { padding-left: max(28px, calc((100vw - 820px) / 2)); padding-right: max(28px, calc((100vw - 820px) / 2)); }
+  main { padding-top: 26px; }
+  .metrics { grid-template-columns: repeat(4, 1fr); }
+  .metric.compact { min-height: 132px; }
+}

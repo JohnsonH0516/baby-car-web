@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f6f7f8">
+  <title>婴儿车监护</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">BABY CAR 001</p>
+      <h1>婴儿车监护</h1>
+    </div>
+    <div class="connection" id="connection" role="status">
+      <span class="status-dot"></span>
+      <span id="connectionText">连接中</span>
+    </div>
+  </header>
+
+  <main>
+    <section class="alarm-banner hidden" id="alarmBanner" aria-live="assertive">
+      <div>
+        <strong>高温报警</strong>
+        <p>检测到有人且温度已达到报警阈值</p>
+      </div>
+      <button id="dismissAlarm" type="button">确认</button>
+    </section>
+
+    <section class="metrics" aria-label="实时数据">
+      <article class="metric primary">
+        <span>实时温度</span>
+        <strong><span id="temperature">--.-</span><small>°C</small></strong>
+        <p id="temperatureState">等待设备数据</p>
+      </article>
+      <article class="metric">
+        <span>报警阈值</span>
+        <strong><span id="threshold">--</span><small>°C</small></strong>
+        <p>远程可调</p>
+      </article>
+      <article class="metric compact">
+        <span>人员状态</span>
+        <strong id="person">--</strong>
+      </article>
+      <article class="metric compact">
+        <span>报警状态</span>
+        <strong id="alarm">--</strong>
+      </article>
+    </section>
+
+    <section class="trend-section">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">RECENT DATA</p>
+          <h2>温度趋势</h2>
+        </div>
+        <span id="updatedAt">尚无数据</span>
+      </div>
+      <div class="chart-wrap">
+        <canvas id="temperatureChart" aria-label="最近温度趋势图"></canvas>
+      </div>
+    </section>
+
+    <section class="control-section">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">REMOTE CONTROL</p>
+          <h2>温度阈值</h2>
+        </div>
+        <output id="thresholdOutput" for="thresholdSlider">32°C</output>
+      </div>
+      <input id="thresholdSlider" type="range" min="15" max="60" value="32" step="1">
+      <div class="range-labels"><span>15°C</span><span>60°C</span></div>
+      <button class="primary-button" id="saveThreshold" type="button">保存阈值</button>
+      <p class="feedback" id="feedback" aria-live="polite"></p>
+    </section>
+  </main>
+
+  <script src="/app.js" defer></script>
+</body>
+</html>
