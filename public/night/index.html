@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#101923">
+  <title>婴儿车监护 · 夜航</title>
+  <link rel="stylesheet" href="/night/styles.css">
+</head>
+<body>
+  <header class="masthead">
+    <a class="brand" href="/night/">◈ <span>夜航 <small>CARE MONITOR</small></span></a>
+    <a class="version" href="/">切换经典版 ↗</a>
+  </header>
+  <main>
+    <div class="intro">
+      <div><p class="eyebrow">BABY CAR / 001</p><h1>每一刻，都在关注。</h1><p class="subtitle">温度、人员与报警状态，一目了然。</p></div>
+      <div class="connection" id="connection" role="status"><span class="status-dot"></span><span id="connectionText">连接中</span></div>
+    </div>
+    <section class="alarm-banner hidden" id="alarmBanner" aria-live="assertive">
+      <div><strong>高温报警</strong><p>检测到有人且温度已达到报警阈值，请及时查看。</p></div><button id="dismissAlarm" type="button">确认提示</button>
+    </section>
+    <div class="dashboard">
+      <section class="overview" aria-label="实时数据">
+        <article class="temperature-panel">
+          <div class="panel-top"><span>实时温度</span><span class="tag">LIVE</span></div>
+          <div class="temperature-reading"><span id="temperature">--.-</span><small>°C</small></div>
+          <p id="temperatureState">等待设备数据</p>
+          <div class="threshold-row"><span>当前报警阈值</span><strong><span id="threshold">--</span> °C</strong></div>
+        </article>
+        <div class="status-row">
+          <article><span class="status-icon">◎</span><div><span>人员状态</span><strong id="person">--</strong></div></article>
+          <article><span class="status-icon">◇</span><div><span>报警状态</span><strong id="alarm">--</strong></div></article>
+        </div>
+      </section>
+      <section class="trend-panel">
+        <div class="section-heading"><div><p class="eyebrow">TEMPERATURE / TREND</p><h2>温度轨迹</h2></div><span id="updatedAt">尚无数据</span></div>
+        <div class="chart-wrap"><canvas id="temperatureChart" aria-label="最近温度趋势图"></canvas></div>
+        <p class="chart-note"><span></span>最近采集的温度记录</p>
+      </section>
+      <section class="control-panel">
+        <div class="section-heading"><div><p class="eyebrow">REMOTE / CONTROL</p><h2>调整守护边界</h2></div><output id="thresholdOutput" for="thresholdSlider">32°C</output></div>
+        <label for="thresholdSlider">温度达到此阈值且检测到有人时触发报警。</label>
+        <input id="thresholdSlider" type="range" min="15" max="60" value="32" step="1">
+        <div class="range-labels"><span>15°C</span><span>60°C</span></div>
+        <button class="primary-button" id="saveThreshold" type="button">保存阈值 <span>↗</span></button>
+        <p class="feedback" id="feedback" aria-live="polite"></p>
+      </section>
+    </div>
+    <footer>婴儿车监护 <span>数据约每 2 秒刷新 · 离线时保留最后记录</span></footer>
+  </main>
+  <script src="/app.js" defer></script>
+</body>
+</html>
