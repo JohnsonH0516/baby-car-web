@@ -121,7 +121,8 @@ function drawChart(points) {
   const height = rect.height;
   const pad = 24;
   ctx.clearRect(0, 0, width, height);
-  ctx.strokeStyle = "#e3e8e5";
+  const chartTheme = getComputedStyle(document.documentElement);
+  ctx.strokeStyle = chartTheme.getPropertyValue("--chart-grid").trim() || "#e3e8e5";
   ctx.lineWidth = 1;
   for (let i = 1; i <= 3; i += 1) {
     const y = pad + ((height - pad * 2) * i) / 4;
@@ -130,7 +131,7 @@ function drawChart(points) {
 
   const values = points.filter((point) => point.temperature !== null);
   if (values.length < 2) {
-    ctx.fillStyle = "#7a8580";
+    ctx.fillStyle = chartTheme.getPropertyValue("--chart-text").trim() || "#7a8580";
     ctx.font = "13px system-ui";
     ctx.textAlign = "center";
     ctx.fillText("等待更多温度数据", width / 2, height / 2);
@@ -140,7 +141,7 @@ function drawChart(points) {
   const temps = values.map((point) => point.temperature);
   const min = Math.min(...temps) - 1;
   const max = Math.max(...temps) + 1;
-  ctx.strokeStyle = "#16875f";
+  ctx.strokeStyle = chartTheme.getPropertyValue("--chart-line").trim() || "#16875f";
   ctx.lineWidth = 2.5;
   ctx.lineJoin = "round";
   ctx.beginPath();
